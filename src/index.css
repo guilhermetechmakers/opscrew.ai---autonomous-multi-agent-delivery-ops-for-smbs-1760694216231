@@ -1,68 +1,217 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&display=swap');
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
+/* OpsCrew.ai Design System with CSS Custom Properties */
+@layer base {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    /* OpsCrew.ai Dark Theme Colors */
+    --background: 24 26 32; /* #181A20 */
+    --foreground: 255 255 255; /* #FFFFFF */
+    
+    --card: 21 23 28; /* #15171C - Sunken */
+    --card-foreground: 255 255 255; /* #FFFFFF */
+    
+    --popover: 34 36 42; /* #22242A - Elevated */
+    --popover-foreground: 255 255 255; /* #FFFFFF */
+    
+    --primary: 59 130 246; /* #3B82F6 */
+    --primary-foreground: 255 255 255; /* #FFFFFF */
+    
+    --secondary: 193 194 198; /* #C1C2C6 */
+    --secondary-foreground: 24 26 32; /* #181A20 */
+    
+    --muted: 35 38 46; /* #23262E */
+    --muted-foreground: 136 141 151; /* #888D97 */
+    
+    --accent: 59 130 246; /* #3B82F6 */
+    --accent-foreground: 255 255 255; /* #FFFFFF */
+    
+    --destructive: 239 68 68; /* #EF4444 */
+    --destructive-foreground: 255 255 255; /* #FFFFFF */
+    
+    --success: 34 197 94; /* #22C55E */
+    --success-foreground: 255 255 255; /* #FFFFFF */
+    
+    --warning: 245 158 11; /* #F59E0B */
+    --warning-foreground: 255 255 255; /* #FFFFFF */
+    
+    --info: 59 130 246; /* #3B82F6 */
+    --info-foreground: 255 255 255; /* #FFFFFF */
+    
+    --border: 35 38 46; /* #23262E */
+    --input: 35 38 46; /* #23262E */
+    --ring: 59 130 246; /* #3B82F6 */
+    
+    --radius: 0.5rem; /* 8px */
   }
-  a:hover {
-    color: #747bff;
+  
+  .dark {
+    /* Dark mode uses same values as root for OpsCrew.ai */
+    --background: 24 26 32; /* #181A20 */
+    --foreground: 255 255 255; /* #FFFFFF */
+    
+    --card: 21 23 28; /* #15171C */
+    --card-foreground: 255 255 255; /* #FFFFFF */
+    
+    --popover: 34 36 42; /* #22242A */
+    --popover-foreground: 255 255 255; /* #FFFFFF */
+    
+    --primary: 59 130 246; /* #3B82F6 */
+    --primary-foreground: 255 255 255; /* #FFFFFF */
+    
+    --secondary: 193 194 198; /* #C1C2C6 */
+    --secondary-foreground: 24 26 32; /* #181A20 */
+    
+    --muted: 35 38 46; /* #23262E */
+    --muted-foreground: 136 141 151; /* #888D97 */
+    
+    --accent: 59 130 246; /* #3B82F6 */
+    --accent-foreground: 255 255 255; /* #FFFFFF */
+    
+    --destructive: 239 68 68; /* #EF4444 */
+    --destructive-foreground: 255 255 255; /* #FFFFFF */
+    
+    --success: 34 197 94; /* #22C55E */
+    --success-foreground: 255 255 255; /* #FFFFFF */
+    
+    --warning: 245 158 11; /* #F59E0B */
+    --warning-foreground: 255 255 255; /* #FFFFFF */
+    
+    --info: 59 130 246; /* #3B82F6 */
+    --info-foreground: 255 255 255; /* #FFFFFF */
+    
+    --border: 35 38 46; /* #23262E */
+    --input: 35 38 46; /* #23262E */
+    --ring: 59 130 246; /* #3B82F6 */
   }
-  button {
-    background-color: #f9f9f9;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  /* Typography Scale */
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+  }
+  
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl;
+  }
+  
+  h2 {
+    @apply text-3xl md:text-4xl lg:text-5xl;
+  }
+  
+  h3 {
+    @apply text-2xl md:text-3xl lg:text-4xl;
+  }
+  
+  h4 {
+    @apply text-xl md:text-2xl lg:text-3xl;
+  }
+  
+  h5 {
+    @apply text-lg md:text-xl lg:text-2xl;
+  }
+  
+  h6 {
+    @apply text-base md:text-lg lg:text-xl;
+  }
+  
+  /* Numeric data styling */
+  .numeric {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+  }
+  
+  /* Focus styles for accessibility */
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* Custom component classes */
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 focus:ring-2 focus:ring-primary focus:ring-offset-2;
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/80 focus:ring-2 focus:ring-secondary focus:ring-offset-2;
+  }
+  
+  .card-hover {
+    @apply transition-all duration-200 hover:shadow-card-hover hover:-translate-y-1;
+  }
+  
+  .input-field {
+    @apply bg-card border border-input text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-ring focus:border-transparent;
+  }
+  
+  .sidebar {
+    @apply w-60 transition-all duration-200;
+  }
+  
+  .sidebar-collapsed {
+    @apply w-16;
+  }
+  
+  .topbar {
+    @apply h-14;
+  }
+  
+  .table-header {
+    @apply text-secondary font-medium;
+  }
+  
+  .table-row {
+    @apply h-11;
+  }
+}
+
+/* Smooth Scrolling */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Custom Animations */
+@keyframes accordion-down {
+  from { height: 0; }
+  to { height: var(--radix-accordion-content-height); }
+}
+
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to { height: 0; }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
