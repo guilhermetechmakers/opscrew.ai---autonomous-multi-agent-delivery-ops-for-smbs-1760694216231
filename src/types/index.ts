@@ -133,6 +133,127 @@ export interface Subscription {
   updated_at: string;
 }
 
+// AI Intake & Proposal Generation types
+export interface ChatMessage {
+  id: string;
+  role: 'user' | 'assistant' | 'system';
+  content: string;
+  timestamp: string;
+  metadata?: {
+    suggestedReplies?: string[];
+    extractedData?: Record<string, any>;
+    confidence?: number;
+  };
+}
+
+export interface LeadSummary {
+  id: string;
+  name: string;
+  email: string;
+  company?: string;
+  phone?: string;
+  projectType: string;
+  budgetRange: string;
+  timeline: string;
+  qualificationScore: number;
+  recommendedPackages: PackageRecommendation[];
+  extractedRequirements: string[];
+  painPoints: string[];
+  decisionMakers: string[];
+  urgency: 'low' | 'medium' | 'high' | 'urgent';
+  source: 'intake_chat' | 'demo_request' | 'referral' | 'direct';
+  status: 'new' | 'qualified' | 'proposal_sent' | 'signed' | 'lost';
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface PackageRecommendation {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  duration: string;
+  features: string[];
+  confidence: number;
+  reasoning: string;
+}
+
+export interface Proposal {
+  id: string;
+  leadId: string;
+  title: string;
+  executiveSummary: string;
+  projectScope: string;
+  deliverables: string[];
+  timeline: string;
+  pricing: ProposalPricing;
+  terms: string[];
+  nextSteps: string[];
+  status: 'draft' | 'sent' | 'reviewed' | 'approved' | 'rejected';
+  requiresApproval: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ProposalPricing {
+  basePrice: number;
+  packages: PackageOption[];
+  addOns: AddOnOption[];
+  totalPrice: number;
+  paymentTerms: string;
+  validUntil: string;
+}
+
+export interface PackageOption {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  duration: string;
+  features: string[];
+  selected: boolean;
+}
+
+export interface AddOnOption {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  selected: boolean;
+}
+
+export interface ESignDocument {
+  id: string;
+  proposalId: string;
+  documentUrl: string;
+  status: 'pending' | 'sent' | 'signed' | 'declined' | 'expired';
+  signers: ESignSigner[];
+  expiresAt: string;
+  signedAt?: string;
+  createdAt: string;
+}
+
+export interface ESignSigner {
+  id: string;
+  name: string;
+  email: string;
+  role: 'client' | 'approver' | 'witness';
+  status: 'pending' | 'signed' | 'declined';
+  signedAt?: string;
+}
+
+export interface AdminApproval {
+  id: string;
+  proposalId: string;
+  requestedBy: string;
+  requestedAt: string;
+  status: 'pending' | 'approved' | 'rejected';
+  reviewedBy?: string;
+  reviewedAt?: string;
+  comments?: string;
+  reason?: string;
+}
+
 // API response types
 export interface ApiResponse<T> {
   data: T | null;

@@ -18,6 +18,7 @@ import SupportQueuePage from "@/pages/SupportQueuePage";
 import BillingPage from "@/pages/BillingPage";
 import SettingsPage from "@/pages/SettingsPage";
 import AdminDashboardPage from "@/pages/AdminDashboardPage";
+import AiIntakePage from "@/pages/AiIntakePage";
 import NotFoundPage from "@/pages/NotFoundPage";
 
 // React Query client with optimal defaults
@@ -51,6 +52,7 @@ export default function App() {
               <Route path="/projects/:id/sprints" element={<SprintPlannerPage />} />
               
               {/* Agent routes */}
+              <Route path="/ai-intake" element={<AiIntakePage />} />
               <Route path="/meetings" element={<MeetingsHubPage />} />
               <Route path="/research" element={<ResearchWorkspacePage />} />
               <Route path="/launch" element={<LaunchConsolePage />} />

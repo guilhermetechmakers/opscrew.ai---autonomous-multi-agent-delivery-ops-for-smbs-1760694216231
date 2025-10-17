@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { DashboardCharts } from "@/components/charts/DashboardCharts";
+import { useNavigate } from "react-router-dom";
 import {
   Activity,
   Users,
@@ -124,6 +125,27 @@ const quickActions = [
 ];
 
 export default function DashboardPage() {
+  const navigate = useNavigate();
+
+  const handleQuickAction = (actionTitle: string) => {
+    switch (actionTitle) {
+      case "AI Intake Chat":
+        navigate("/ai-intake");
+        break;
+      case "Start New Project":
+        navigate("/projects/spin-up");
+        break;
+      case "Schedule Meeting":
+        navigate("/meetings");
+        break;
+      case "View Reports":
+        // Could navigate to analytics or reports page
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <DashboardLayout>
       <div className="space-y-6">
@@ -202,6 +224,7 @@ export default function DashboardPage() {
                     key={index}
                     variant="outline"
                     className="w-full justify-start h-auto p-4"
+                    onClick={() => handleQuickAction(action.title)}
                   >
                     <div className="flex items-center space-x-3">
                       <action.icon className="h-4 w-4" />

@@ -14,6 +14,7 @@ import {
   Shield,
   ChevronLeft,
   ChevronRight,
+  Bot,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -21,6 +22,7 @@ import { Separator } from "@/components/ui/separator";
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { name: "Projects", href: "/projects", icon: FolderOpen },
+  { name: "AI Intake", href: "/ai-intake", icon: Bot },
   { name: "Meetings", href: "/meetings", icon: MessageSquare },
   { name: "Research", href: "/research", icon: Search },
   { name: "Launch", href: "/launch", icon: Rocket },
